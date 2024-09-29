@@ -40,7 +40,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    "account"
+    "account",
+    "app"
 ]
 
 MIDDLEWARE = [
@@ -132,3 +133,6 @@ SUPERUSER_PASSWORD = env("SUPERUSER_PASSWORD")
 SAMPLE_NAME = env("SAMPLE_NAME")
 SAMPLE_EMAIL = env("SAMPLE_EMAIL")
 SAMPLE_PASSWORD = env("SAMPLE_PASSWORD")
+
+LOGIN_REDIRECT_URL = "drinker:home"
+LOGOUT_REDIRECT_URL = "drinker:index"
