@@ -1,0 +1,31 @@
+<ul class="pagination">
+    <li class="paginate-item">
+        {% if page_obj.has_previous %}<a class="paginate-link" href="?page={{ page_obj.previous_page_number }}">{% else %}<a class="paginate-link deactive" href="">{% endif %}
+            <span aria-hidden="true">&laquo;</span>
+        </a>
+    </li>
+
+    {% if page_obj.paginator.num_pages <= 6 %}
+    {% for num in page_obj.paginator.page_range %}
+    <li class="{% if page_obj.number == num %}paginate-item active{% else %}paginate-item{% endif %}"><a class="paginate-link" href="?page={{ num }}">{{ num }}</a></li>
+    {% endfor %}
+    {% else %}
+    <li class="{% if page_obj.number == 1 %}paginate-item active{% else %}paginate-item{% endif %}"><a class="paginate-link" href="?page=1">1</a></li>
+    {% if page_obj.number|add:-2 > 1 %}<li>...</li>{% endif %}
+    {% for num in page_obj.paginator.page_range %}
+    {% if num != 1 and num != page_obj.paginator.num_pages %}
+        {% if num <= page_obj.number|add:1 and num >= page_obj.number|add:-1 %}
+        <li class="{% if page_obj.number == num %}paginate-item active{% else %}paginate-item{% endif %}"><a class="paginate-link" href="?page={{ num }}">{{ num }}</a></li>
+        {% endif %}
+    {% endif %}
+    {% endfor %}
+    {% if page_obj.number|add:2 < page_obj.paginator.num_pages %}<li>...</li>{% endif %}
+    <li class="{% if page_obj.number == page_obj.paginator.num_pages %}paginate-item active{% else %}paginate-item{% endif %}"><a class="paginate-link" href="?page={{ page_obj.paginator.num_pages }}">{{ page_obj.paginator.num_pages }}</a></li>
+    {% endif %}
+
+    <li class="paginate-item">
+        {% if page_obj.has_next %}<a class="paginate-link" href="?page={{ page_obj.next_page_number }}">{% else %}<a class="paginate-link deactive" href="">{% endif %}
+            <span aria-hidden="true">&raquo;</span>
+        </a>
+    </li>
+</ul>

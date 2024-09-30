@@ -1,0 +1,12 @@
+<article class="article">
+    <a href="{% url 'app:bottle-management-detail' object.pk %}">
+        <p class="article-name">{{ object.management_name }}</p>
+        <p class="article-content">{{ object.restaurant }}</p>
+        {% if object.bottle_count or object.bottle_count == 0 %}
+        <span class="article-data">
+            <p>ボトル数</p>
+            <p class="">{{ object.bottle_count }}</p>
+        </span>
+        {% endif %}
+    </a>
+</article>

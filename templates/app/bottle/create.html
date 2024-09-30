@@ -1,0 +1,12 @@
+{% extends "app/bottle/_base.html" %}
+{% block main %}
+<section id="restaurant-detail" class="section">
+    <div class="section-title-container">
+        <h2 class="section-title">Create</h2>
+    </div>
+    <div class="section-content">
+        {% include "base/_form.html" with form=form %}
+    </div>
+</section>
+
+{% endblock main %}

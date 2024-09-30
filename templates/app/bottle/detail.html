@@ -1,0 +1,44 @@
+{% extends "app/bottle/_base.html" %}
+{% block main %}
+<section id="bottle-detail" class="section detail">
+    <div class="section-title-container">
+        <h2 class="section-title">Information</h2>
+        {% if object.management.customer == user %}
+        <a href="{% url 'app:bottle-edit' object.pk %}">Edit</a>
+        {% endif %}
+    </div>
+    <div class="section-content">
+        <div class="information-container">
+            <h3 class="information-title">Bottle Name</h3>
+            <div class="information-content">
+                <p>{{ object.bottle_name }}</p>
+            </div>
+        </div>
+        <div class="information-container">
+            <h3 class="information-title">Management ID</h3>
+            <div class="information-content">
+                <p>{{ object.management.management_name }}</p>
+            </div>
+        </div>
+        <div class="information-container">
+            <h3 class="information-title">Purchase Date</h3>
+            <div class="information-content">
+                <p>{{ object.purchase_date }}</p>
+            </div>
+        </div>
+        <div class="information-container">
+            <h3 class="information-title">Restaurant</h3>
+            <div class="information-content">
+                <p><a href="{% url 'app:restaurant-detail' object.management.restaurant.pk %}">{{ object.management.restaurant }}</a></p>
+                <iframe src="http://maps.google.co.jp/maps?q={{ object.management.restaurant.address }}&output=embed&t=m&z=16&hl=ja" frameborder="0" scrolling="no"></iframe>
+            </div>
+        </div>
+        {% if object.management.customer == user %}
+        <form action="{% url 'app:bottle-delete' object.pk %}" method="post" class="">
+            {% csrf_token %}
+            <button type="submit" class="button">Delete</button>
+        </form>
+        {% endif %}
+    </div>
+</section>
+{% endblock main %}

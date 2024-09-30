@@ -1,0 +1,14 @@
+{% extends "app/bottle/_base.html" %}
+{% block main %}
+<section id="restaurant-index-list" class="section">
+    <div class="section-title-container">
+        <h2 class="section-title">List <small>with not-empty</small></h2>
+        <a href="{% url 'app:bottle-list' %}">Show all</a>
+    </div>
+    <ul class="section-content">
+        {% for bottle in user_bottle_list %}
+        <li>{% include "app/bottle/_list_article.html" with object=bottle %}</li>
+        {% endfor %}
+    </ul>
+</section>
+{% endblock main %}

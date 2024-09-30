@@ -12,6 +12,24 @@ LIQUOR_TYPE = [
     ("ot", "Other")
 ]
 
+class RestaurantManager(models.Manager):
+    def get_index_list(self, user):
+        user_restaurants = self.prefetch_related('bottle_management').filter(
+            bottle_management__customer=user
+        ).annotate(bottle_count=models.Count('bottle_management__bottle'))
+
+        if user_restaurants.exists():
+            return user_restaurants.order_by("-bottle_management__bottle")
+        else:
+            return self.order_by('-pk')
+
+    def get_search_list(self, query=""):
+        if query != "":
+            query_set = self.filter(models.Q(name__icontains=query)|models.Q(address__icontains=query))
+            return query_set
+        else:
+            return self.prefetch_related('bottle_management').order_by('-pk')
+
 class Restaurant(models.Model):
     name = models.CharField(
         verbose_name="店名",
@@ -29,9 +47,28 @@ class Restaurant(models.Model):
         on_delete=models.SET_NULL,
         null=True
     )
+    objects = RestaurantManager()
 
     def __str__(self):
         return self.name
+
+class BottleManagementManager(models.Manager):
+    def get_index_list(self, user):
+        user_bottle_managements = self.filter(
+            customer=user
+        ).annotate(bottle_count=models.Count('bottle_management__bottle'))
+
+        if user_bottle_managements.exists():
+            return user_bottle_managements.order_by("-bottle_management__bottle")
+        else:
+            return self.order_by('-pk')
+
+    def get_search_list(self, query=""):
+        if query != "":
+            query_set = self.filter(models.Q(management_name__icontains=query)|models.Q(restaurant__icontains=query))
+            return query_set
+        else:
+            return self.prefetch_related('bottle_management').order_by('-pk')
 
 class BottleManagement(models.Model):
     customer = models.ForeignKey(
@@ -49,6 +86,7 @@ class BottleManagement(models.Model):
         verbose_name="管理用ID",
         max_length=10
     )
+    # objects = BottleManagementManager()
 
     def __str__(self):
         return f"{self.customer}_{self.management_name}"

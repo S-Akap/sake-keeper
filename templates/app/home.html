@@ -1,1 +1,37 @@
-hello world from home
+{% extends "base/_base.html" %}
+{% block title %}SakeKeeper{% endblock title %}
+{% block main %}
+<section class="section">
+    <div class="section-title-container">
+        <h2 class="section-title">Restaurant</h2>
+        <a href="{% url 'app:restaurant-index' %}">Index page</a>
+    </div>
+    <div class="section-content home-description">
+        <p>Restaurantは、ボトルをキープすることができる飲食店に関する機能です。<br>
+        基本的に、ユーザーは削除することができませんが、自身が追加したレストランに関しては、管理者に対して、削除依頼を出すことができます。</p>
+    </div>
+</section>
+<section class="section">
+    <div class="section-title-container">
+        <h2 class="section-title">Bottle Management</h2>
+        <a href="{% url 'app:bottle-management-index' %}">Index page</a>
+    </div>
+    <div class="section-content home-description">
+        <p>Bottle Managementは、ユーザーが各飲食店でボトルをキープする際の管理用IDに関する機能です。<br>
+        Bottle ManagementのIndexページに関しては、表示内容について検討中です。もし、「〇〇に関する情報が欲しい」等の要望があれば、下記メールアドレスまでご連絡いただけると幸いです。<br>
+        </p>
+        <p style="margin-top: 5px;">sho.akap@gmail.com</p>
+
+    </div>
+</section>
+<section class="section">
+    <div class="section-title-container">
+        <h2 class="section-title home-description">Bottle</h2>
+        <a href="{% url 'app:bottle-index' %}">Index page</a>
+    </div>
+    <div class="section-content">
+        <p>Bottleは、ユーザーが各飲食店でキープしているボトルに関する機能です。<br>
+</p>
+    </div>
+</section>
+{% endblock main %}

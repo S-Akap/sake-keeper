@@ -1,0 +1,10 @@
+<article class="article">
+    <a href="{% url 'app:bottle-detail' object.pk %}">
+        <p class="article-name">{{ object.bottle_name }}</p>
+        <p class="article-content">{{ object.management.restaurant }}</p>
+        <span class="article-data">
+            <p>購入日</p>
+            <p class="">{{ object.purchase_date }}</p>
+        </span>
+    </a>
+</article>

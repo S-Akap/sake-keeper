@@ -1,0 +1,22 @@
+{% extends "app/restaurant/_base.html" %}
+{% block main %}
+<section id="restaurant-search-list" class="section search-list">
+    <div class="section-title-container">
+        <h2 class="section-title">List</h2>
+        <a href="{% url 'app:restaurant-create' %}">Create</a>
+    </div>
+    <form action="" method="get" class="search-form">
+        <input type="text" name="query" value="{{ request.GET.query }}">
+        <button type="submit" class="search-btn"></button>
+    </form>
+    {% if not object_list %}<p>検索結果が0件です。</p>{% endif %}
+    <ul class="section-content">
+        {% for object in object_list %}
+        <li>{% include "app/restaurant/_list_article.html" with object=object %}</li>
+        {% endfor %}
+    </ul>
+    {% if is_paginated %}
+    {% include "base/_paginate.html" with page_obj=page_obj %}
+    {% endif %}
+</section>
+{% endblock main %}

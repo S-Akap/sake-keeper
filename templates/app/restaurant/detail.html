@@ -1,0 +1,32 @@
+{% extends "app/restaurant/_base.html" %}
+{% block main %}
+<section id="restaurant-detail" class="section detail">
+    <div class="section-title-container">
+        <h2 class="section-title">Information</h2>
+        {% if object.create_user == user %}
+        <a href="{% url 'app:restaurant-edit' object.pk %}">Edit</a>
+        {% endif %}
+    </div>
+    <div class="section-content">
+        <div class="information-container">
+            <h3 class="information-title">Name</h3>
+            <div class="information-content">
+                <p>{{ object.name }}</p>
+            </div>
+        </div>
+
+        <div class="information-container">
+            <h3 class="information-title">Address</h3>
+            <div class="information-content">
+                <p>{{ object.address }}</p>
+                <iframe src="http://maps.google.co.jp/maps?q={{ object.address }}&output=embed&t=m&z=16&hl=ja" frameborder="0" scrolling="no"></iframe>
+            </div>
+        </div>
+        {% if object.create_user == user %}
+        <a href="mailto:sho.akahori@outlook.com?subject=【Drinker】{{ object.name }}削除依頼&body=Restaurant[{{ object.pk }}, {{ object.name }}] from {{ object.create_user }}" class="mail">
+            <span class="material-symbols-outlined">mail</span>管理者へ削除をメール依頼
+        </a>
+        {% endif %}
+    </div>
+</section>
+{% endblock main %}

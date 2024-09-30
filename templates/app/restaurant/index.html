@@ -1,0 +1,14 @@
+{% extends "app/restaurant/_base.html" %}
+{% block main %}
+<section id="restaurant-index-list" class="section">
+    <div class="section-title-container">
+        <h2 class="section-title">List <small>with your bottle</small></h2>
+        <a href="{% url 'app:restaurant-list' %}">Show all</a>
+    </div>
+    <ul class="section-content">
+        {% for restaurant in user_restaurant_list %}
+        <li>{% include "app/restaurant/_list_article.html" with object=restaurant %}</li>
+        {% endfor %}
+    </ul>
+</section>
+{% endblock main %}

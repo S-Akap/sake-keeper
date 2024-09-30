@@ -1,1 +1,31 @@
-hello world from index
+{% extends "base/_base.html" %}
+{% block title %}SakeKeeper{% endblock title %}
+{% block main %}
+<section id="index-list" class="section">
+    <div class="section-title-container">
+        <h2 class="section-title">Sample Account</h2>
+        <a href="{% url 'account:login' %}">Log In</a>
+    </div>
+    <div class="section-content">
+        <div class="information-container">
+            <h3 class="information-title">Email</h3>
+            <div class="information-content">
+                <p>sample@example.com</p>
+            </div>
+        </div>
+        <div class="information-container">
+            <h3 class="information-title">Username</h3>
+            <div class="information-content">
+                <p>sample</p>
+            </div>
+        </div>
+        <div class="information-container">
+            <h3 class="information-title">Password</h3>
+            <div class="information-content">
+                <p>password</p>
+            </div>
+        </div>
+        <p><small>※<a href="{% url 'admin:login' %}" style="border-bottom: 1px solid var(--color-primary1);">adminサイト</a> へログインも可能です</small></p>
+    </div>
+</section>
+{% endblock main %}
