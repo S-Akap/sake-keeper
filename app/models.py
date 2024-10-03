@@ -19,9 +19,7 @@ class RestaurantManager(models.Manager):
         ).annotate(bottle_count=models.Count('bottle_management__bottle'))
 
         if user_restaurants.exists():
-            return user_restaurants.order_by("-bottle_management__bottle")
-        else:
-            return self.order_by('-pk')
+            return user_restaurants.order_by("-bottle_management__bottle")[:3]
 
     def get_search_list(self, query=""):
         if query != "":

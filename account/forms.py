@@ -16,3 +16,9 @@ class SignUpForm(UserCreationForm):
 class LoginFrom(AuthenticationForm):
     class Meta:
         model = get_user_model()
+        fields = (
+            "email",
+        )
+        labels = {
+            "email": "メールアドレス",
+        }
