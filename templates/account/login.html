@@ -5,7 +5,21 @@
         <h2 class="section-title">Log In</h2>
     </div>
     <div class="section-content">
-        {% include "base/_form.html" with form=form %}
+        <form action="" method="POST" class="input-form">
+            {{ form.non_field_errors }}
+            {% for field in form %}
+            <div class="form-content">
+                <label for="{{ field.id_for_label }}">{% if field.name == 'username' %}email{% else %}{{field.name}}{% endif %}</label>
+                {{ field }}
+                {{ field.errors }}
+            </div>
+            {% endfor %}
+            {% csrf_token %}
+            <div class="form-button-content">
+                <button type="submit">Submit</button>
+                <a href="javascript:history.back()" class="button sub-btn">Back</a>
+            </div>
+        </form>
     </div>
 </section>
 {% endblock %}
