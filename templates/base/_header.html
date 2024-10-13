@@ -1,5 +1,6 @@
+{% load static %}
 {% if not user.is_authenticated %}
-<h1><a href="{% url 'app:index' %}">SakeKeeper</a></h1>
+<a href="{% url 'app:index' %}" class="header-logo"><img src="{% static 'img/logo.svg' %}" alt="サービスロゴ"></a>
 <div class="hamburger-menu">
     <input type="checkbox" id="menu-btn-check">
     <label for="menu-btn-check" class="menu-btn"><span></span></label>
@@ -12,7 +13,7 @@
     </nav>
 </div>
 {% else %}
-<h1><a href="{% url 'app:home' %}">SakeKeeper</a></h1>
+<a href="{% url 'app:home' %}" class="header-logo"><img src="{% static 'img/logo.svg' %}" alt="サービスロゴ"></a>
 <div class="hamburger-menu"></div>
     <input type="checkbox" id="menu-btn-check">
     <label for="menu-btn-check" class="menu-btn"><span></span></label>

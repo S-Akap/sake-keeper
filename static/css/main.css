@@ -74,6 +74,10 @@ button, .button {
     background-color: var(--color-primary2);
 }
 
+.header-logo,.header-logo>img {
+    height: 100%;
+}
+
 .menu-btn {
     position: relative;
     display: flex;
