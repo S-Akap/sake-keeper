@@ -1,5 +1,6 @@
 from django.db import models
 from django.conf import settings
+from datetime import date
 
 LIQUOR_TYPE = [
     ("gi", "Gin"),
@@ -107,7 +108,7 @@ class Bottle(models.Model):
     )
     purchase_date = models.DateField(
         verbose_name="ボトル購入日",
-        auto_now=True
+        default = date.today()
     )
     storage_period = models.DateField(
         verbose_name="預かり期日",

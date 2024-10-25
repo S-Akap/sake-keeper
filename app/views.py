@@ -4,7 +4,7 @@ from django.views.generic import TemplateView, CreateView, ListView, DetailView,
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse_lazy
 from .models import Restaurant, BottleManagement, Bottle
-from .forms import RestaurantForm, BottleManagementForm, BottleForm
+from .forms import RestaurantForm, BottleManagementForm, BottleForm, BottleEditForm
 from django.db.models import Q, Count
 
 # Create your views here.
@@ -147,7 +147,7 @@ class BottleDetailView(LoginRequiredMixin, DetailView):
 class BottleEditView(LoginRequiredMixin, UpdateView):
     model = Bottle
     template_name = "app/bottle/edit.html"
-    form_class = BottleForm
+    form_class = BottleEditForm
 
     def get_form_kwargs(self):
         kwargs = super().get_form_kwargs()
