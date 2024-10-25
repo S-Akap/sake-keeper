@@ -121,6 +121,11 @@ class BottleCreateView(LoginRequiredMixin, CreateView):
     form_class = BottleForm
     success_url = reverse_lazy("app:bottle-list")
 
+    def get_form_kwargs(self):
+        kwargs = super().get_form_kwargs()
+        kwargs['user'] = self.request.user
+        return kwargs
+
 class BottleListView(LoginRequiredMixin, ListView):
     model = Bottle
     template_name = "app/bottle/list.html"
