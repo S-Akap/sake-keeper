@@ -7,7 +7,7 @@ User = get_user_model()
 class Command(BaseCommand):
     def handle(self, *args, **options):
         if not User.objects.filter(username=settings.SAMPLE_NAME).exists():
-            User.objects.create(
+            User.objects.create_user(
                 username=settings.SAMPLE_NAME,
                 email=settings.SAMPLE_EMAIL,
                 password=settings.SAMPLE_PASSWORD,
