@@ -3,14 +3,14 @@ from django.conf import settings
 from datetime import date
 
 LIQUOR_TYPE = [
-    ("gi", "Gin"),
-    ("vo", "Vodka"),
-    ("te", "Tequila"),
-    ("ru", "Rum"),
-    ("wi", "Whisky"),
-    ("br", "Brandy"),
-    ("sh", "Shochu"),
-    ("ot", "Other")
+    ("gi", "ジン"),
+    ("vo", "ウォッカ"),
+    ("te", "テキーラ"),
+    ("ru", "ラム"),
+    ("wi", "ウィスキー"),
+    ("br", "ブランデー"),
+    ("sh", "焼酎"),
+    ("ot", "その他")
 ]
 
 class RestaurantManager(models.Manager):
