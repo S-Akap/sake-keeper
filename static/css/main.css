@@ -41,7 +41,7 @@ body {
 #main > * {
     width: 100%;
 }
-input {
+input, select {
     background-color: var(--color-white);
     border: 2px solid var(--color-primary1);
     border-radius: 3px;
@@ -437,7 +437,7 @@ iframe {
     gap: 5px;
     width: 100%;
 }
-.form-content>input {
+.form-content>input, select {
     width: 100%;
 }
 .form-content>label {
