@@ -8,7 +8,7 @@ class BottleManagementAdmin(admin.ModelAdmin):
     list_display=["pk", "management_name", "customer", "restaurant"]
 
 class BottleAdmin(admin.ModelAdmin):
-    list_display=["pk", "management", "liquor_type", "bottle_name", "purchase_date", "storage_period", "is_empty"]
+    list_display=["pk", "management__customer", "management", "liquor_type", "bottle_name", "purchase_date", "storage_period", "is_empty", ]
 
 admin.site.register(Restaurant, RestaurantAdmin)
 admin.site.register(BottleManagement, BottleManagementAdmin)

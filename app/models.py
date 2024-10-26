@@ -88,7 +88,7 @@ class BottleManagement(models.Model):
     # objects = BottleManagementManager()
 
     def __str__(self):
-        return f"{self.customer}_{self.management_name}"
+        return self.management_name
 
 class Bottle(models.Model):
     management = models.ForeignKey(
