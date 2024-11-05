@@ -17,8 +17,9 @@ class BottleManagementForm(forms.ModelForm):
 class BottleForm(forms.ModelForm):
     class Meta:
         model = Bottle
-        fields = ("management", "liquor_type", "bottle_name", "storage_period",)
+        fields = ("management", "liquor_type", "bottle_name", "purchase_date", "storage_period",)
         widgets = {
+            "purchase_date": DateInput(),
             "storage_period": DateInput(),
         }
 
