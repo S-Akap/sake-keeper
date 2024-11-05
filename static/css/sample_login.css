@@ -1,0 +1,36 @@
+@charset "UTF-8";
+.modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.5);
+    justify-content: center;
+    align-items: center;
+}
+
+.modal.open {
+    display: flex;
+}
+
+.modal-content {
+    background-color: var(--color-primary2);
+    padding: 20px;
+    border-radius: 8px;
+    text-align: center;
+}
+
+.modal-button-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+    margin-top: 30px;
+}
+
+.modal-button-container>button {
+    width: 100%;
+}
