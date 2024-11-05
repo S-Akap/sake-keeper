@@ -1,10 +1,11 @@
 {% extends "base/_base.html" %}
+{% load static %}
 {% block title %}SakeKeeper{% endblock title %}
 {% block main %}
 <section id="index-list" class="section">
     <div class="section-title-container">
         <h2 class="section-title">Sample Account</h2>
-        <a href="{% url 'account:login' %}">Log In</a>
+        <a href="{% url 'account:sample-login' %}" id="sample-login">Log In</a>
     </div>
     <div class="section-content">
         <div class="information-container">
@@ -27,5 +28,18 @@
         </div>
         <p><small>※<a href="{% url 'admin:login' %}" style="border-bottom: 1px solid var(--color-primary1);">adminサイト</a> へログインも可能です</small></p>
     </div>
+
+    <div id="sample-login-modal" class="modal">
+        <div class="modal-content">
+            <p>Sample Accountでログインしますか？</p>
+            <div class="modal-button-container">
+                <button id="confirm-button">Log In</button>
+                <button id="cancel-button" class="sub-btn">Back</button>
+            </div>
+        </div>
+    </div>
+
 </section>
+<script src="{% static 'js/sample_login.js' %}"></script>
+<link rel="stylesheet" href="{% static 'css/sample_login.css' %}">
 {% endblock main %}

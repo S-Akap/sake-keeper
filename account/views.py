@@ -3,6 +3,8 @@ from django.views.generic import CreateView
 from django.contrib.auth.views import LoginView as BaseLoginView, LogoutView as BaseLogoutView
 from django.urls import reverse_lazy
 from .forms import SignUpForm, LoginFrom
+from django.conf import settings
+from django.shortcuts import redirect
 
 class SignUpView(CreateView):
     form_class = SignUpForm
@@ -23,3 +25,10 @@ class LogInView(BaseLoginView):
 
 class LogOutView(BaseLogoutView):
     success_url = reverse_lazy("app:index")
+
+def sample_login(request):
+    email=settings.SAMPLE_EMAIL
+    password=settings.SAMPLE_PASSWORD
+    user = authenticate(email=email, password=password)
+    login(request, user)
+    return redirect("app:home")
