@@ -55,6 +55,7 @@ button, .button {
     border-radius: 5px;
     background-color: var(--color-primary1);
     color: var(--color-primary2);
+    border: 2px solid var(--color-primary1);
 }
 .sub-btn {
     background-color: var(--color-primary3);
