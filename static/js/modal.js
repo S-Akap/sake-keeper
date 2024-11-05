@@ -56,3 +56,26 @@ function bottleManagementDelete() {
         }
     });
 }
+
+function bottleChangeIsEmpty(isEmpty) {
+    let text;
+    if (isEmpty == "False") {
+        text = '[空ボトルか？]をNoからYesに変更しますか？'
+    } else if (isEmpty == "True") {
+        text = '[空ボトルか？]をYesからNoに変更しますか？'
+    }
+    swalMixin.fire({
+        title: '確認',
+        text: text,
+        color: "#1e3e61", // var(--color-primary1)
+        background: "#dde7f5", // var(--color-white)
+        showCancelButton: true,
+        confirmButtonText: 'Change',
+        cancelButtonText: 'Back',
+        reverseButtons: true
+    }).then((result) => {
+        if (result.isConfirmed) {
+            document.querySelector("#bottle-change-is-empty-form").submit();
+        }
+    });
+}

@@ -33,14 +33,23 @@
             </div>
         </div>
         <div class="information-container">
+            <h3 class="information-title">空ボトルか？</h3>
+            <div class="information-content">
+                <p>{% if object.is_empty %}Yes{% else %}No{% endif %}</p>
+            </div>
+        </div>
+        <div class="information-container">
             <h3 class="information-title">飲食店</h3>
             <div class="information-content">
-                <p><a href="{% url 'app:restaurant-detail' object.management.restaurant.pk %}">{{ object.management.restaurant }}</a></p>
-                <iframe src="http://maps.google.co.jp/maps?q={{ object.management.restaurant.address }}&output=embed&t=m&z=16&hl=ja" frameborder="0" scrolling="no"></iframe>
+                <p><a href="{% url 'app:restaurant-detail' object.management.restaurant.pk %}" style="border-bottom: 1px solid var(--color-primary1);">{{ object.management.restaurant }}</a></p>
             </div>
         </div>
         {% if object.management.customer == user %}
-        <div class="button-content">
+        <div class="button-row-container">
+            <form action="{% url 'app:bottle-change-is-empty' object.pk %}" method="post" id="bottle-change-is-empty-form">
+                {% csrf_token %}
+                <button type="button" onclick="bottleChangeIsEmpty('{{ object.is_empty }}')" class="button">Change Empty</button>
+            </form>
             <form action="{% url 'app:bottle-delete' object.pk %}" method="post" id="bottle-delete-form">
                 {% csrf_token %}
                 <button type="button" onclick="bottleDelete()" class="button">Delete</button>

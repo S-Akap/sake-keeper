@@ -2,10 +2,13 @@ from django.forms import BaseModelForm
 from django.http import HttpResponse
 from django.views.generic import TemplateView, CreateView, ListView, DetailView, UpdateView, DeleteView
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.urls import reverse_lazy
+from django.urls import reverse_lazy, reverse
 from .models import Restaurant, BottleManagement, Bottle
 from .forms import RestaurantForm, BottleManagementForm, BottleForm, BottleEditForm
 from django.db.models import Q, Count
+
+from django.shortcuts import get_object_or_404, redirect
+from django.views import View
 
 # Create your views here.
 class IndexView(TemplateView):
@@ -162,3 +165,11 @@ class BottleDeleteView(LoginRequiredMixin, DeleteView):
     model = Bottle
     template_name = "app/bottle/detail.html"
     success_url = reverse_lazy("app:bottle-list")
+
+class BottleToggleIsEmptyView(View):
+    def post(self, request, pk, *args, **kwargs):
+        bottle = get_object_or_404(Bottle, pk=pk)
+        bottle.is_empty = not bottle.is_empty
+        bottle.save()
+
+        return redirect(reverse("app:bottle-detail", args=[pk]))

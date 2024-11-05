@@ -25,4 +25,5 @@ urlpatterns = [
     path("bottles/<int:pk>", views.BottleDetailView.as_view(), name="bottle-detail"),
     path("bottles/<int:pk>/edit", views.BottleEditView.as_view(), name="bottle-edit"),
     path("bottles/<int:pk>/delete", views.BottleDeleteView.as_view(), name="bottle-delete"),
+    path('bottle/<int:pk>/change-is-empty', views.BottleToggleIsEmptyView.as_view(), name='bottle-change-is-empty'),
 ]
