@@ -9,13 +9,13 @@
     </div>
     <div class="section-content">
         <div class="information-container">
-            <h3 class="information-title">Management ID</h3>
+            <h3 class="information-title">管理用ID</h3>
             <div class="information-content">
                 <p>{{ object.management_name }}</p>
             </div>
         </div>
         <div class="information-container">
-            <h3 class="information-title">Restaurant</h3>
+            <h3 class="information-title">飲食店</h3>
             <div class="information-content">
                 <p><a href="{% url 'app:restaurant-detail' object.restaurant.pk %}">{{ object.restaurant }}</a></p>
                 <iframe src="http://maps.google.co.jp/maps?q={{ object.restaurant.address }}&output=embed&t=m&z=16&hl=ja" frameborder="0" scrolling="no"></iframe>

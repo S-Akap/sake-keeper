@@ -9,25 +9,31 @@
     </div>
     <div class="section-content">
         <div class="information-container">
-            <h3 class="information-title">Bottle Name</h3>
+            <h3 class="information-title">酒名</h3>
             <div class="information-content">
                 <p>{{ object.bottle_name }}</p>
             </div>
         </div>
         <div class="information-container">
-            <h3 class="information-title">Management ID</h3>
+            <h3 class="information-title">管理用ID</h3>
             <div class="information-content">
                 <p>{{ object.management.management_name }}</p>
             </div>
         </div>
         <div class="information-container">
-            <h3 class="information-title">Purchase Date</h3>
+            <h3 class="information-title">ボトル購入日</h3>
             <div class="information-content">
                 <p>{{ object.purchase_date }}</p>
             </div>
         </div>
         <div class="information-container">
-            <h3 class="information-title">Restaurant</h3>
+            <h3 class="information-title">預かり期日</h3>
+            <div class="information-content">
+                <p>{{ object.storage_period }}</p>
+            </div>
+        </div>
+        <div class="information-container">
+            <h3 class="information-title">飲食店</h3>
             <div class="information-content">
                 <p><a href="{% url 'app:restaurant-detail' object.management.restaurant.pk %}">{{ object.management.restaurant }}</a></p>
                 <iframe src="http://maps.google.co.jp/maps?q={{ object.management.restaurant.address }}&output=embed&t=m&z=16&hl=ja" frameborder="0" scrolling="no"></iframe>
