@@ -3,8 +3,12 @@
         <p class="article-name">{{ object.bottle_name }}</p>
         <p class="article-content">{{ object.management.restaurant }}</p>
         <span class="article-data">
-            <p>購入日</p>
-            <p class="">{{ object.purchase_date }}</p>
+            <p>空ボトル</p>
+            <p class="">{% if object.is_empty %}Yes{% else %}No{% endif %}</p>
+        </span>
+        <span class="article-data">
+            <p>預かり期日</p>
+            <p class="">{{ object.storage_period }}</p>
         </span>
     </a>
 </article>
