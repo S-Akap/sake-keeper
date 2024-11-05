@@ -22,9 +22,9 @@
             </div>
         </div>
         {% if object.customer == user %}
-        <form action="{% url 'app:bottle-management-delete' object.pk %}" method="post" class="">
+        <form action="{% url 'app:bottle-management-delete' object.pk %}" method="post" id="bottle-management-delete-form">
             {% csrf_token %}
-            <button type="submit" class="button">Delete</button>
+            <button type="button" onclick="bottleManagementDelete()" class="button" >Delete</button>
         </form>
         {% endif %}
     </div>

@@ -40,10 +40,12 @@
             </div>
         </div>
         {% if object.management.customer == user %}
-        <form action="{% url 'app:bottle-delete' object.pk %}" method="post" class="">
-            {% csrf_token %}
-            <button type="submit" class="button">Delete</button>
-        </form>
+        <div class="button-content">
+            <form action="{% url 'app:bottle-delete' object.pk %}" method="post" id="bottle-delete-form">
+                {% csrf_token %}
+                <button type="button" onclick="bottleDelete()" class="button">Delete</button>
+            </form>
+        </div>
         {% endif %}
     </div>
 </section>

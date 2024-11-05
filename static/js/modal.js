@@ -23,3 +23,36 @@ function sampleLogin() {
     });
 }
 
+function bottleDelete() {
+    swalMixin.fire({
+        title: '確認',
+        text: 'このボトルを削除しますか？',
+        color: "#1e3e61", // var(--color-primary1)
+        background: "#dde7f5", // var(--color-white)
+        showCancelButton: true,
+        confirmButtonText: 'Delete',
+        cancelButtonText: 'Back',
+        reverseButtons: true
+    }).then((result) => {
+        if (result.isConfirmed) {
+            document.querySelector("#bottle-delete-form").submit();
+        }
+    });
+}
+
+function bottleManagementDelete() {
+    swalMixin.fire({
+        title: '確認',
+        text: 'この管理用IDを削除しますか？',
+        color: "#1e3e61", // var(--color-primary1)
+        background: "#dde7f5", // var(--color-white)
+        showCancelButton: true,
+        confirmButtonText: 'Delete',
+        cancelButtonText: 'Back',
+        reverseButtons: true
+    }).then((result) => {
+        if (result.isConfirmed) {
+            document.querySelector("#bottle-management-delete-form").submit();
+        }
+    });
+}
