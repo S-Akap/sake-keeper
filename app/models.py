@@ -28,8 +28,8 @@ class RestaurantManager(models.Manager):
         if user_restaurants.exists():
             return user_restaurants.order_by("-bottle_management__bottle")[:3]
 
-    def get_search_list(self, query=""):
-        if query != "":
+    def get_search_list(self, query=None):
+        if query is not None:
             query_set = self.filter(models.Q(name__icontains=query)|models.Q(address__icontains=query))
             return query_set
         else:
@@ -68,12 +68,12 @@ class BottleManagementManager(models.Manager):
         else:
             return self.order_by('-pk')
 
-    def get_search_list(self, query=""):
-        if query != "":
-            query_set = self.filter(models.Q(management_name__icontains=query)|models.Q(restaurant__icontains=query))
+    def get_search_list(self, user, query=None):
+        if query is not None:
+            query_set = self.filter(models.Q(management_name__icontains=query)|models.Q(restaurant__name__icontains=query)).annotate(bottle_count=models.Count('bottle'))
             return query_set
         else:
-            return self.prefetch_related('bottle_management').order_by('-pk')
+            return self.filter(customer=user).annotate(bottle_count=models.Count('bottle'))
 
 class BottleManagement(models.Model):
     customer = models.ForeignKey(
@@ -91,14 +91,14 @@ class BottleManagement(models.Model):
         verbose_name="管理用ID",
         max_length=10
     )
-    # objects = BottleManagementManager()
+    objects = BottleManagementManager()
 
     def __str__(self):
         return self.management_name
 
 class BottleManager(models.Manager):
-    def get_search_list(self, user, query=""):
-        if query != "":
+    def get_search_list(self, user, query=None):
+        if query is not None:
             liquor_type_value = get_liquor_type_value(query)
             if liquor_type_value is not None:
                 query_set = self.filter(
@@ -115,7 +115,7 @@ class BottleManager(models.Manager):
                 ).distinct().order_by("-pk")
             return query_set
         else:
-            return self.prefetch_related('bottle_management').order_by('-pk')
+            return self.filter(management__customer=user).order_by("-pk")
 
 class Bottle(models.Model):
     management = models.ForeignKey(

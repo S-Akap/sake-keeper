@@ -41,10 +41,7 @@ class RestaurantListView(LoginRequiredMixin, ListView):
 
     def get_queryset(self):
         query = self.request.GET.get("query")
-        if query:
-            query_set = Restaurant.objects.get_search_list(query)
-        else:
-            query_set = Restaurant.objects.order_by("-pk")
+        query_set = Restaurant.objects.get_search_list(query)
         return query_set
 
 class RestaurantDetailView(LoginRequiredMixin, DetailView):
@@ -82,12 +79,7 @@ class BottleManagementListView(LoginRequiredMixin, ListView):
     def get_queryset(self):
         query = self.request.GET.get("query")
         user = self.request.user
-        query_set = BottleManagement.objects.filter(customer=user).annotate(bottle_count=Count('bottle'))
-        if query:
-            if query_set.exists():
-                query_set = query_set.filter(Q(restaurant__name__icontains=query)|Q(management_name__icontains=query))
-        else:
-            query_set = query_set.order_by("-pk")
+        query_set = BottleManagement.objects.get_search_list(user=user, query=query)
         return query_set
 
 class BottleManagementDetailView(LoginRequiredMixin, DetailView):
@@ -137,10 +129,7 @@ class BottleListView(LoginRequiredMixin, ListView):
     def get_queryset(self):
         query = self.request.GET.get("query")
         user = self.request.user
-        if query:
-            query_set = Bottle.objects.get_search_list(user=user, query=query)
-        else:
-            query_set = Bottle.objects.filter(management__customer=user).order_by("-pk")
+        query_set = Bottle.objects.get_search_list(user=user, query=query)
         return query_set
 
 class BottleDetailView(LoginRequiredMixin, DetailView):
