@@ -13,6 +13,12 @@ LIQUOR_TYPE = [
     ("ot", "その他")
 ]
 
+def get_liquor_type_value(label):
+    for value, display in LIQUOR_TYPE:
+        if label == display:
+            return value
+    return None
+
 class RestaurantManager(models.Manager):
     def get_index_list(self, user):
         user_restaurants = self.prefetch_related('bottle_management').filter(
@@ -90,6 +96,27 @@ class BottleManagement(models.Model):
     def __str__(self):
         return self.management_name
 
+class BottleManager(models.Manager):
+    def get_search_list(self, user, query=""):
+        if query != "":
+            liquor_type_value = get_liquor_type_value(query)
+            if liquor_type_value is not None:
+                query_set = self.filter(
+                    models.Q(management__management_name__icontains=query)&models.Q(management__customer=user)|
+                    models.Q(management__restaurant__name__icontains=query)&models.Q(management__customer=user)|
+                    models.Q(liquor_type__icontains=liquor_type_value)&models.Q(management__customer=user)|
+                    models.Q(bottle_name__icontains=query)&models.Q(management__customer=user)
+                ).distinct().order_by("-pk")
+            else:
+                query_set = self.filter(
+                    models.Q(management__management_name__icontains=query)&models.Q(management__customer=user)|
+                    models.Q(management__restaurant__name__icontains=query)&models.Q(management__customer=user)|
+                    models.Q(bottle_name__icontains=query)&models.Q(management__customer=user)
+                ).distinct().order_by("-pk")
+            return query_set
+        else:
+            return self.prefetch_related('bottle_management').order_by('-pk')
+
 class Bottle(models.Model):
     management = models.ForeignKey(
         BottleManagement,
@@ -119,6 +146,8 @@ class Bottle(models.Model):
         verbose_name="空ボトルか？",
         default=False
     )
+
+    objects = BottleManager()
 
     def __str__(self):
         return self.bottle_name

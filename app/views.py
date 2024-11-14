@@ -138,7 +138,7 @@ class BottleListView(LoginRequiredMixin, ListView):
         query = self.request.GET.get("query")
         user = self.request.user
         if query:
-            query_set = Bottle.objects.filter(management__customer=user, bottle_name=query)
+            query_set = Bottle.objects.get_search_list(user=user, query=query)
         else:
             query_set = Bottle.objects.filter(management__customer=user).order_by("-pk")
         return query_set
