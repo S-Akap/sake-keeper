@@ -15,6 +15,14 @@
             </div>
         </div>
         <div class="information-container">
+            <h3 class="information-title">キープボトル</h3>
+            <div class="information-content" style="display: flex; flex-direction: column; gap: 5px;">
+                {% for bottle in object.bottle.all %}
+                <p><a href="{% url 'app:bottle-detail' bottle.pk %}" style="border-bottom: 1px solid var(--color-primary1);">{{ bottle.bottle_name }}</a></p>
+                {% endfor %}
+            </div>
+        </div>
+        <div class="information-container">
             <h3 class="information-title">飲食店</h3>
             <div class="information-content">
                 <p><a href="{% url 'app:restaurant-detail' object.restaurant.pk %}">{{ object.restaurant }}</a></p>
